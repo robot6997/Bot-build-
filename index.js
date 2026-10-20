@@ -34,8 +34,7 @@ const DB_DIR = path.join(__dirname, 'database');
 const PREMIUM_FILE = path.join(DB_DIR, 'premium_users.json');
 const HISTORY_FILE = path.join(DB_DIR, 'history.json');
 const LOG_FILE = path.join(DB_DIR, 'bot.log');
-const BANNER_IMAGE = path.join(__dirname, 'tumb', 'banner.jpg');
-
+const BANNER_IMAGE = path.join(__dirname, 'banner.jpg');
 // Auto-create folders
 [TEMP_DIR, OUTPUT_DIR, DB_DIR, path.join(__dirname, 'tumb')].forEach(dir => {
   try {
