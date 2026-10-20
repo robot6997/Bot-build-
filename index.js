@@ -14,7 +14,7 @@ const OWNER_USERNAME = process.env.OWNER_USERNAME || 'owner';
 const ADMIN_IDS = (process.env.ADMIN_IDS || '').split(',').map(id => id.trim());
 
 // 🔥🔥🔥 URL LOCAL BOT API RAILWAY LO 🔥🔥🔥
-const LOCAL_API_URL = 'http://telegram-bot-api.railway.internal';
+const LOCAL_API_URL = 'http://telegram-bot-api-railway.railway.internal';
 if (!BOT_TOKEN) {
   console.error('❌ BOT_TOKEN tidak ada di Railway Variables!');
   process.exit(1);
