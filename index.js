@@ -174,6 +174,9 @@ function checkAccess(userId, chatId) {
 // ═══════════════════════════════════════════════════════════════════════════════
 // COMMAND: /start
 // ═══════════════════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════════
+// COMMAND: /start (VERSI FIX TANPA MARKDOWN)
+// ═══════════════════════════════════════════════════════════════════════════════
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   const userId = String(msg.from.id);
@@ -188,14 +191,14 @@ bot.onText(/\/start/, (msg) => {
     text = `🔄 BOT RENAME DOMAIN DART (RAILWAY 2GB)\n\nHalo ${name}! (Admin)\n\n` +
       `📊 Status: Premium ✅\n\n` +
       `📋 Cara Pakai:\n1️⃣ Kirim file ZIP (Max 2 GB)\n2️⃣ Kirim domain lama\n3️⃣ Kirim domain baru\n4️⃣ Bot proses rename\n5️⃣ File hasil dikirim\n\n` +
-      `⚡ Hanya file .dart yang diubah!\n🛡️ Kode lain tetap aman!\n\n` +
+      `⚡ Hanya file .dart yang diubah!\n\n` +
       `🔧 Command Admin:\n/addprem <id>\n/delprem <id>\n/listprem\n/history\n/logs\n\n` +
       `Kirim file ZIP untuk memulai!`;
   } else if (isUserPremium) {
     text = `🔄 BOT RENAME DOMAIN DART (RAILWAY 2GB)\n\nHalo ${name}!\n\n` +
       `📊 Status: Premium ✅\n\n` +
       `📋 Cara Pakai:\n1️⃣ Kirim file ZIP (Max 2 GB)\n2️⃣ Kirim domain lama\n3️⃣ Kirim domain baru\n4️⃣ Bot proses rename\n5️⃣ File hasil dikirim\n\n` +
-      `⚡ Hanya file .dart yang diubah!\n🛡️ Kode lain tetap aman!\n\n` +
+      `⚡ Hanya file .dart yang diubah!\n\n` +
       `Kirim file ZIP untuk memulai!`;
   } else {
     text = `🔒 AKSES TERBATAS\n\nHalo ${name}!\n\nBot ini hanya untuk pengguna Premium!\n\n` +
@@ -203,17 +206,12 @@ bot.onText(/\/start/, (msg) => {
     keyboard = [[{ text: '👤 HUBUNGI OWNER', url: `https://t.me/${OWNER_USERNAME}` }]];
   }
 
-  const options = {};
-  if (keyboard.length > 0) options.reply_markup = { inline_keyboard: keyboard };
-
-  if (fs.existsSync(BANNER_IMAGE)) {
-    bot.sendPhoto(chatId, BANNER_IMAGE, { caption: text, reply_markup: keyboard.length > 0 ? { inline_keyboard: keyboard } : undefined })
-      .catch(() => bot.sendMessage(chatId, text, options));
-  } else {
-    bot.sendMessage(chatId, text, options);
-  }
+  // 🔥 KIRIM PESAN TEKS SAJA (TANPA FOTO & TANPA MARKDOWN) 🔥
+  const options = { reply_markup: keyboard.length > 0 ? { inline_keyboard: keyboard } : undefined };
+  bot.sendMessage(chatId, text, options).catch((err) => {
+    console.error("Gagal kirim pesan /start:", err.message);
+  });
 });
-
 // ═══════════════════════════════════════════════════════════════════════════════
 // COMMAND: ADMIN & PREMIUM
 // ═══════════════════════════════════════════════════════════════════════════════
